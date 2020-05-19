@@ -3,6 +3,7 @@ import React, { Component} from 'react';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
+import ErrorBoundary from '../components/ErrorBoundary';
 //import { robots } from './robots'; // Only needed in Version 3. In Version 4, we're requesting this info from RESTful API elsewhere
 import './App.css';
 
@@ -229,6 +230,9 @@ class App extends Component { // Add when making reactive components
             return robot.name.toLowerCase().includes(searchfield.toLowerCase());
         })
         console.log('render');
+
+        // Removed if else with return <condition> ? A : B syntax. Cleaner!
+        
         return !database.length ? // Shorter, better way to write database.length === 0
         <h1>Loading</h1> :
             (
@@ -236,7 +240,10 @@ class App extends Component { // Add when making reactive components
                     <h1 className='f1'>RoboFriends</h1>
                     <SearchBox searchchange={this.onSearchChange} />
                     <Scroll>
+                        {/* Added in 202: Error Boundary */}
+                        <ErrorBoundary>
                         <CardList robots={filteredRobots} />
+                        </ErrorBoundary>
                     </Scroll>
                 </div>
             )

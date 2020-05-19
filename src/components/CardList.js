@@ -40,7 +40,7 @@ import Card from './Card.js';
 // Everything inside the curly brackets is JavaScript, so we can cut and paste and place the code inside the <div>
 
 const CardList = ({robots}) => {
-   return (
+    return (
         <div>
             {
                 robots.map((user,i) => {
